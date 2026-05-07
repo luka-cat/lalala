@@ -1,0 +1,2001 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coffee Arte Gallery — Арт-кофейня в Бишкеке</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5EFE0;
+    --cream-dark: #EDE4CC;
+    --warm-white: #FAF7F2;
+    --espresso: #2C1810;
+    --espresso-light: #4A2E1A;
+    --caramel: #C4884A;
+    --caramel-light: #D9A96B;
+    --rose-dust: #C4857A;
+    --sage: #8A9E8A;
+    --charcoal: #1A1A1A;
+    --text-muted: #7A6E62;
+    --gold: #B8963A;
+    --border: rgba(44,24,16,0.12);
+    --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--espresso);
+    overflow-x: hidden;
+  }
+
+  /* NAVIGATION */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background var(--transition), backdrop-filter var(--transition), box-shadow var(--transition);
+  }
+
+  nav.scrolled {
+    background: rgba(250, 247, 242, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--warm-white);
+    letter-spacing: 0.02em;
+    transition: color var(--transition);
+    text-decoration: none;
+  }
+
+  nav.scrolled .nav-logo { color: var(--espresso); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(250,247,242,0.85);
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+
+  nav.scrolled .nav-links a { color: var(--text-muted); }
+  .nav-links a:hover { color: var(--caramel) !important; }
+
+  .nav-cta {
+    background: var(--caramel);
+    color: var(--warm-white) !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 2rem;
+    font-size: 0.8rem !important;
+    transition: background var(--transition), transform var(--transition) !important;
+  }
+
+  .nav-cta:hover { background: var(--espresso) !important; transform: translateY(-1px); }
+
+  .mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+
+  .mobile-menu-btn span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--warm-white);
+    transition: background var(--transition);
+    border-radius: 2px;
+  }
+
+  nav.scrolled .mobile-menu-btn span { background: var(--espresso); }
+
+  /* HERO */
+  #hero {
+    height: 100vh;
+    min-height: 600px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(160deg, rgba(44,24,16,0.7) 0%, rgba(44,24,16,0.4) 50%, rgba(196,136,74,0.3) 100%),
+      url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><defs><radialGradient id="g1" cx="30%" cy="40%"><stop offset="0%" stop-color="%23C4884A" stop-opacity="0.3"/><stop offset="100%" stop-color="%232C1810" stop-opacity="0.9"/></radialGradient></defs><rect width="800" height="600" fill="url(%23g1)"/><circle cx="200" cy="150" r="120" fill="%23C4884A" opacity="0.08"/><circle cx="600" cy="400" r="180" fill="%23C4857A" opacity="0.07"/><circle cx="400" cy="300" r="200" fill="%23B8963A" opacity="0.05"/><text x="80" y="280" font-family="serif" font-size="160" fill="%23FAF7F2" opacity="0.03">☕</text></svg>') center/cover;
+  }
+
+  /* Animated grain overlay */
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  /* Decorative art frames in hero */
+  .hero-frame {
+    position: absolute;
+    border: 1px solid rgba(250,247,242,0.2);
+    pointer-events: none;
+  }
+
+  .hero-frame-1 {
+    top: 8%; right: 6%;
+    width: 180px; height: 220px;
+    transform: rotate(2deg);
+  }
+
+  .hero-frame-2 {
+    bottom: 12%; left: 4%;
+    width: 130px; height: 160px;
+    transform: rotate(-3deg);
+  }
+
+  .hero-frame-inner {
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(250,247,242,0.12);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 1.5rem;
+    max-width: 780px;
+    animation: heroFadeIn 1.2s ease forwards;
+  }
+
+  @keyframes heroFadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--caramel-light);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .hero-eyebrow::before,
+  .hero-eyebrow::after {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: var(--caramel-light);
+    opacity: 0.7;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 6vw, 4.2rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--warm-white);
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--caramel-light);
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(250,247,242,0.75);
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--caramel);
+    color: var(--warm-white);
+    border: none;
+    padding: 0.9rem 2rem;
+    border-radius: 3rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: all var(--transition);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-primary:hover {
+    background: var(--espresso);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(44,24,16,0.3);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--warm-white);
+    border: 1px solid rgba(250,247,242,0.5);
+    padding: 0.9rem 2rem;
+    border-radius: 3rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: all var(--transition);
+    text-decoration: none;
+    backdrop-filter: blur(6px);
+  }
+
+  .btn-outline:hover {
+    background: rgba(250,247,242,0.15);
+    border-color: rgba(250,247,242,0.8);
+    transform: translateY(-2px);
+  }
+
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    z-index: 2;
+    opacity: 0.5;
+    animation: heroFadeIn 2s ease 0.8s forwards;
+  }
+
+  .hero-scroll-hint span {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--warm-white);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(250,247,242,0.8), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 5rem 1.5rem;
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--caramel);
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--caramel);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.7rem, 4vw, 2.8rem);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--espresso);
+    margin-bottom: 1rem;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--caramel);
+  }
+
+  .section-desc {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--text-muted);
+    max-width: 520px;
+  }
+
+  /* BOOKING SECTION */
+  #booking {
+    background: var(--espresso);
+    max-width: 100%;
+    padding: 5rem 1.5rem;
+  }
+
+  #booking > * {
+    max-width: 1160px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .booking-inner {
+    max-width: 1160px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .booking-text .section-label { color: var(--caramel-light); }
+  .booking-text .section-label::before { background: var(--caramel-light); }
+
+  .booking-text .section-title { color: var(--warm-white); }
+
+  .booking-text .section-desc { color: rgba(250,247,242,0.6); max-width: 380px; }
+
+  .booking-perks {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .perk {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 0.85rem;
+    color: rgba(250,247,242,0.7);
+  }
+
+  .perk-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--caramel);
+    flex-shrink: 0;
+  }
+
+  .booking-form {
+    background: var(--warm-white);
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+  }
+
+  .form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--espresso);
+    margin-bottom: 1.5rem;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .form-group.full { grid-column: 1 / -1; }
+
+  .form-group label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .form-group input,
+  .form-group select {
+    border: 1px solid var(--border);
+    border-radius: 0.6rem;
+    padding: 0.7rem 0.9rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--espresso);
+    background: white;
+    transition: border-color var(--transition);
+    outline: none;
+    appearance: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: var(--caramel);
+    box-shadow: 0 0 0 3px rgba(196,136,74,0.12);
+  }
+
+  .btn-whatsapp {
+    width: 100%;
+    background: #25D366;
+    color: white;
+    border: none;
+    padding: 0.95rem 1.5rem;
+    border-radius: 0.7rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    transition: all var(--transition);
+    margin-top: 0.5rem;
+    text-decoration: none;
+  }
+
+  .btn-whatsapp:hover {
+    background: #1da851;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(37,211,102,0.3);
+  }
+
+  .wa-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* MASTERCLASSES */
+  #masterclasses {
+    padding: 5rem 1.5rem;
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .mc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .mc-card {
+    border-radius: 1.2rem;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform var(--transition), box-shadow var(--transition);
+    background: white;
+  }
+
+  .mc-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(44,24,16,0.12);
+  }
+
+  .mc-card-img {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mc-card-img svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .mc-badge {
+    position: absolute;
+    top: 0.9rem;
+    left: 0.9rem;
+    background: var(--caramel);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border-radius: 2rem;
+  }
+
+  .mc-card-body {
+    padding: 1.4rem;
+  }
+
+  .mc-date {
+    font-size: 0.72rem;
+    color: var(--caramel);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .mc-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--espresso);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .mc-desc {
+    font-size: 0.84rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+  }
+
+  .mc-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mc-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--espresso);
+  }
+
+  .mc-price span {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-left: 0.2rem;
+  }
+
+  .btn-sign {
+    background: var(--espresso);
+    color: var(--warm-white);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition);
+    text-decoration: none;
+  }
+
+  .btn-sign:hover {
+    background: var(--caramel);
+    transform: translateY(-1px);
+  }
+
+  /* MENU */
+  #menu {
+    background: var(--cream);
+    max-width: 100%;
+    padding: 5rem 1.5rem;
+  }
+
+  .menu-inner {
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+
+  .menu-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 0.5rem 1.2rem;
+    border-radius: 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.83rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+
+  .tab-btn.active,
+  .tab-btn:hover {
+    background: var(--espresso);
+    color: var(--warm-white);
+    border-color: var(--espresso);
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .menu-card {
+    background: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform var(--transition);
+  }
+
+  .menu-card:hover { transform: translateY(-4px); }
+
+  .menu-card-img {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    background: linear-gradient(135deg, var(--cream), var(--cream-dark));
+  }
+
+  .menu-card-body {
+    padding: 1rem;
+  }
+
+  .menu-item-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--espresso);
+    margin-bottom: 0.3rem;
+  }
+
+  .menu-item-desc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 0.7rem;
+  }
+
+  .menu-item-price {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--caramel);
+  }
+
+  /* GALLERY */
+  #gallery {
+    padding: 5rem 1.5rem;
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(3, 180px);
+    gap: 0.8rem;
+    margin-top: 2.5rem;
+  }
+
+  .gallery-item {
+    border-radius: 0.8rem;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .gallery-item:nth-child(1) { grid-column: span 5; grid-row: span 2; }
+  .gallery-item:nth-child(2) { grid-column: span 4; grid-row: span 1; }
+  .gallery-item:nth-child(3) { grid-column: span 3; grid-row: span 1; }
+  .gallery-item:nth-child(4) { grid-column: span 4; grid-row: span 1; }
+  .gallery-item:nth-child(5) { grid-column: span 3; grid-row: span 1; }
+  .gallery-item:nth-child(6) { grid-column: span 4; grid-row: span 1; }
+  .gallery-item:nth-child(7) { grid-column: span 5; grid-row: span 1; }
+  .gallery-item:nth-child(8) { grid-column: span 3; grid-row: span 1; }
+
+  .gallery-item svg {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease;
+  }
+
+  .gallery-item:hover svg { transform: scale(1.05); }
+
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(44,24,16,0.6) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity var(--transition);
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+  }
+
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+  .gallery-overlay span {
+    color: var(--warm-white);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  /* REVIEWS */
+  #reviews {
+    background: var(--espresso);
+    max-width: 100%;
+    padding: 5rem 1.5rem;
+  }
+
+  .reviews-inner {
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+
+  .reviews-inner .section-label { color: var(--caramel-light); }
+  .reviews-inner .section-label::before { background: var(--caramel-light); }
+  .reviews-inner .section-title { color: var(--warm-white); }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+    margin-top: 2.5rem;
+  }
+
+  .review-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: background var(--transition);
+  }
+
+  .review-card:hover { background: rgba(255,255,255,0.09); }
+
+  .review-stars {
+    color: var(--caramel-light);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.8rem;
+  }
+
+  .review-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    line-height: 1.65;
+    color: rgba(250,247,242,0.85);
+    margin-bottom: 1.2rem;
+  }
+
+  .review-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .review-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .review-name {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--warm-white);
+  }
+
+  .review-meta {
+    font-size: 0.75rem;
+    color: rgba(250,247,242,0.45);
+    margin-top: 0.15rem;
+  }
+
+  /* ABOUT */
+  #about {
+    padding: 5rem 1.5rem;
+    max-width: 1160px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-frame {
+    width: 100%;
+    aspect-ratio: 4/5;
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .about-frame svg { width: 100%; height: 100%; }
+
+  .about-badge {
+    position: absolute;
+    bottom: -1.5rem;
+    right: -1.5rem;
+    width: 110px;
+    height: 110px;
+    background: var(--caramel);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+    box-shadow: 0 8px 30px rgba(196,136,74,0.4);
+  }
+
+  .about-badge-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.75rem;
+    font-style: italic;
+    color: white;
+    line-height: 1.3;
+  }
+
+  .about-content .section-desc {
+    margin-bottom: 1.5rem;
+    max-width: 100%;
+  }
+
+  .about-values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .value-item {
+    padding: 1.2rem;
+    background: var(--cream);
+    border-radius: 0.8rem;
+    border-left: 3px solid var(--caramel);
+  }
+
+  .value-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--espresso);
+    margin-bottom: 0.3rem;
+  }
+
+  .value-desc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* CONTACTS */
+  #contacts {
+    background: var(--cream);
+    max-width: 100%;
+    padding: 5rem 1.5rem;
+  }
+
+  .contacts-inner {
+    max-width: 1160px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-icon {
+    width: 42px;
+    height: 42px;
+    background: var(--espresso);
+    border-radius: 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.1rem;
+  }
+
+  .contact-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+  }
+
+  .contact-value {
+    font-size: 0.95rem;
+    color: var(--espresso);
+    font-weight: 400;
+  }
+
+  .contact-value a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .contact-value a:hover { color: var(--caramel); }
+
+  .social-buttons {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .btn-social {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.3rem;
+    border-radius: 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.83rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition);
+    text-decoration: none;
+    border: none;
+  }
+
+  .btn-wa {
+    background: #25D366;
+    color: white;
+  }
+
+  .btn-wa:hover {
+    background: #1da851;
+    transform: translateY(-2px);
+  }
+
+  .btn-ig {
+    background: linear-gradient(135deg, #E1306C, #833AB4);
+    color: white;
+  }
+
+  .btn-ig:hover {
+    filter: brightness(1.15);
+    transform: translateY(-2px);
+  }
+
+  .map-placeholder {
+    border-radius: 1.2rem;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    background: var(--cream-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+
+  .map-placeholder svg { width: 100%; height: 100%; }
+
+  /* FOOTER */
+  footer {
+    background: var(--charcoal);
+    color: rgba(250,247,242,0.5);
+    text-align: center;
+    padding: 2rem 1.5rem;
+    font-size: 0.8rem;
+  }
+
+  footer strong {
+    color: var(--warm-white);
+    font-weight: 500;
+  }
+
+  /* STICKY CTA */
+  .sticky-cta {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    align-items: flex-end;
+    transition: opacity var(--transition);
+  }
+
+  .sticky-wa {
+    width: 52px;
+    height: 52px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    transition: all var(--transition);
+    text-decoration: none;
+  }
+
+  .sticky-wa:hover {
+    transform: scale(1.1) translateY(-2px);
+    box-shadow: 0 8px 30px rgba(37,211,102,0.5);
+  }
+
+  .sticky-book {
+    background: var(--caramel);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.3rem;
+    border-radius: 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(196,136,74,0.4);
+    transition: all var(--transition);
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .sticky-book:hover {
+    background: var(--espresso);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(44,24,16,0.3);
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.25rem; }
+
+    .nav-links { display: none; }
+
+    .mobile-menu-btn { display: flex; }
+
+    .hero-frame-1, .hero-frame-2 { display: none; }
+
+    .booking-inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .form-grid { grid-template-columns: 1fr; }
+
+    #about {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .about-badge {
+      right: 0;
+      bottom: -1rem;
+    }
+
+    .contacts-inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+
+    .gallery-item { grid-column: span 1 !important; grid-row: span 1 !important; height: 140px; }
+
+    .about-values { grid-template-columns: 1fr; }
+
+    .section-header { grid-template-columns: 1fr; }
+
+    .hero-buttons { flex-direction: column; align-items: center; }
+
+    .sticky-cta { bottom: 1rem; right: 1rem; }
+  }
+
+  @media (max-width: 480px) {
+    section { padding: 3.5rem 1.2rem; }
+
+    .booking-form { padding: 1.5rem; }
+
+    .mc-grid { grid-template-columns: 1fr; }
+  }
+
+  /* FADE-IN ANIMATIONS */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* NAV MOBILE MENU */
+  .mobile-nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--espresso);
+    z-index: 999;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .mobile-nav-overlay.open { display: flex; }
+
+  .mobile-nav-overlay a {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--warm-white);
+    text-decoration: none;
+    opacity: 0.85;
+    transition: color var(--transition), opacity var(--transition);
+  }
+
+  .mobile-nav-overlay a:hover { color: var(--caramel-light); opacity: 1; }
+
+  .mobile-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--warm-white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity var(--transition);
+  }
+
+  .mobile-close:hover { opacity: 1; }
+</style>
+</head>
+<body>
+
+<!-- Mobile nav overlay -->
+<div class="mobile-nav-overlay" id="mobileNav">
+  <button class="mobile-close" onclick="closeMobileNav()">✕</button>
+  <a href="#booking" onclick="closeMobileNav()">Забронировать</a>
+  <a href="#masterclasses" onclick="closeMobileNav()">Мастер-классы</a>
+  <a href="#menu" onclick="closeMobileNav()">Меню</a>
+  <a href="#gallery" onclick="closeMobileNav()">Галерея</a>
+  <a href="#about" onclick="closeMobileNav()">О нас</a>
+  <a href="#contacts" onclick="closeMobileNav()">Контакты</a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#hero" class="nav-logo">Coffee Arte</a>
+  <ul class="nav-links">
+    <li><a href="#booking">Бронирование</a></li>
+    <li><a href="#masterclasses">Мастер-классы</a></li>
+    <li><a href="#menu">Меню</a></li>
+    <li><a href="#gallery">Галерея</a></li>
+    <li><a href="#about">О нас</a></li>
+    <li><a href="#contacts" class="nav-cta">Контакты</a></li>
+  </ul>
+  <button class="mobile-menu-btn" onclick="openMobileNav()" aria-label="Меню">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-frame hero-frame-1"><div class="hero-frame-inner"></div></div>
+  <div class="hero-frame hero-frame-2"><div class="hero-frame-inner"></div></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Бишкек · Арт-галерея · Кофейня</div>
+    <h1 class="hero-title">
+      Арт-кофейня в Бишкеке<br>
+      с атмосферой и <em>мастер-классами</em>
+    </h1>
+    <p class="hero-subtitle">место, куда приходят за эмоциями</p>
+    <div class="hero-buttons">
+      <a href="#booking" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Забронировать стол
+      </a>
+      <a href="#masterclasses" class="btn-outline">Посмотреть мастер-классы</a>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<div id="booking">
+  <div class="booking-inner">
+    <div class="booking-text fade-in">
+      <div class="section-label">Бронирование</div>
+      <h2 class="section-title">Займите своё<br><em>место в атмосфере</em></h2>
+      <p class="section-desc">Столики разлетаются быстро — особенно в выходные. Оставьте заявку, и мы подтвердим бронь в течение 5 минут.</p>
+      <div class="booking-perks">
+        <div class="perk"><div class="perk-dot"></div><span>Подтверждение через WhatsApp за 5 минут</span></div>
+        <div class="perk"><div class="perk-dot"></div><span>Специальное оформление для свиданий и праздников</span></div>
+        <div class="perk"><div class="perk-dot"></div><span>Резерв стола на 2 часа</span></div>
+        <div class="perk"><div class="perk-dot"></div><span>Работаем ежедневно 09:00–22:00</span></div>
+      </div>
+    </div>
+    <div class="booking-form fade-in">
+      <div class="form-title">Забронировать стол</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Ваше имя</label>
+          <input type="text" id="fname" placeholder="Алина" autocomplete="given-name">
+        </div>
+        <div class="form-group">
+          <label>Телефон</label>
+          <input type="tel" id="fphone" placeholder="+996 700 000 000" autocomplete="tel">
+        </div>
+        <div class="form-group">
+          <label>Дата</label>
+          <input type="date" id="fdate">
+        </div>
+        <div class="form-group">
+          <label>Время</label>
+          <input type="time" id="ftime" min="09:00" max="22:00">
+        </div>
+        <div class="form-group full">
+          <label>Количество гостей</label>
+          <select id="fguests">
+            <option value="">Выберите...</option>
+            <option value="1">1 гость</option>
+            <option value="2">2 гостя — идеально для свидания ✨</option>
+            <option value="3">3 гостя</option>
+            <option value="4">4 гостя</option>
+            <option value="5">5–6 гостей</option>
+            <option value="7">7 и более</option>
+          </select>
+        </div>
+      </div>
+      <a href="#" class="btn-whatsapp" id="bookingWaBtn">
+        <svg class="wa-icon" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Отправить заявку в WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- MASTERCLASSES -->
+<section id="masterclasses">
+  <div class="section-header fade-in">
+    <div>
+      <div class="section-label">Мастер-классы</div>
+      <h2 class="section-title">Создайте что-то<br><em>своими руками</em></h2>
+    </div>
+    <a href="#contacts" class="btn-primary" style="white-space: nowrap; align-self: flex-end;">Все события →</a>
+  </div>
+  <div class="mc-grid">
+    <!-- Card 1 -->
+    <div class="mc-card fade-in">
+      <div class="mc-card-img">
+        <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="320" height="200" fill="#EDE4CC"/>
+          <circle cx="160" cy="90" r="60" fill="#C4884A" opacity="0.3"/>
+          <circle cx="160" cy="90" r="40" fill="#C4884A" opacity="0.4"/>
+          <rect x="80" y="60" width="160" height="120" rx="4" fill="none" stroke="#2C1810" stroke-width="1" opacity="0.2"/>
+          <text x="160" y="75" text-anchor="middle" font-size="28" fill="#C4884A" opacity="0.8">🎨</text>
+          <text x="160" y="115" text-anchor="middle" font-family="Georgia, serif" font-size="13" fill="#2C1810" opacity="0.6">Акварельный вечер</text>
+          <line x1="80" y1="130" x2="240" y2="130" stroke="#2C1810" stroke-width="0.5" opacity="0.2"/>
+          <circle cx="100" cy="150" r="8" fill="#C4884A" opacity="0.4"/>
+          <circle cx="160" cy="155" r="10" fill="#C4857A" opacity="0.3"/>
+          <circle cx="220" cy="148" r="7" fill="#B8963A" opacity="0.4"/>
+        </svg>
+        <div class="mc-badge">Популярно</div>
+      </div>
+      <div class="mc-card-body">
+        <div class="mc-date">Каждую пятницу · 19:00</div>
+        <div class="mc-title">Акварельный вечер</div>
+        <div class="mc-desc">Рисуем акварелью под живую музыку. Все материалы включены. Преподаватель — художница Айгуль.</div>
+        <div class="mc-footer">
+          <div class="mc-price">1 200 <span>сом / чел</span></div>
+          <a href="#" class="btn-sign" onclick="signupMC('Акварельный вечер')">Записаться</a>
+        </div>
+      </div>
+    </div>
+    <!-- Card 2 -->
+    <div class="mc-card fade-in">
+      <div class="mc-card-img">
+        <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="320" height="200" fill="#F0E8D8"/>
+          <rect x="60" y="40" width="200" height="120" rx="3" fill="#2C1810" opacity="0.08"/>
+          <rect x="70" y="50" width="180" height="100" rx="2" fill="#2C1810" opacity="0.05"/>
+          <text x="160" y="85" text-anchor="middle" font-size="32" fill="#C4857A" opacity="0.9">🖶</text>
+          <text x="160" y="120" text-anchor="middle" font-family="Georgia, serif" font-size="12" fill="#2C1810" opacity="0.5">Линогравюра</text>
+          <circle cx="90" cy="160" r="12" fill="#C4884A" opacity="0.3"/>
+          <circle cx="160" cy="162" r="15" fill="#C4857A" opacity="0.25"/>
+          <circle cx="230" cy="158" r="11" fill="#B8963A" opacity="0.3"/>
+          <line x1="60" y1="140" x2="260" y2="140" stroke="#2C1810" stroke-width="0.5" opacity="0.15"/>
+        </svg>
+        <div class="mc-badge" style="background: var(--rose-dust)">Новинка</div>
+      </div>
+      <div class="mc-card-body">
+        <div class="mc-date">Субботы · 15:00</div>
+        <div class="mc-title">Линогравюра: печать вручную</div>
+        <div class="mc-desc">Создайте уникальный принт на бумаге или ткани. Домой унесёте свои работы. Группы до 8 человек.</div>
+        <div class="mc-footer">
+          <div class="mc-price">1 500 <span>сом / чел</span></div>
+          <a href="#" class="btn-sign" onclick="signupMC('Линогравюра')">Записаться</a>
+        </div>
+      </div>
+    </div>
+    <!-- Card 3 -->
+    <div class="mc-card fade-in">
+      <div class="mc-card-img">
+        <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="320" height="200" fill="#EAE0CE"/>
+          <path d="M100 160 Q160 60 220 160" fill="#C4884A" opacity="0.15"/>
+          <path d="M90 165 Q160 50 230 165" fill="none" stroke="#C4884A" stroke-width="2" opacity="0.5"/>
+          <text x="160" y="80" text-anchor="middle" font-size="30" fill="#B8963A" opacity="0.8">☕</text>
+          <circle cx="120" cy="130" r="18" fill="#C4884A" opacity="0.25"/>
+          <circle cx="160" cy="120" r="22" fill="#C4857A" opacity="0.2"/>
+          <circle cx="200" cy="128" r="16" fill="#B8963A" opacity="0.25"/>
+          <text x="160" y="170" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#2C1810" opacity="0.5">Латте-арт</text>
+        </svg>
+      </div>
+      <div class="mc-card-body">
+        <div class="mc-date">Воскресенья · 12:00</div>
+        <div class="mc-title">Латте-арт: рисуем кофе</div>
+        <div class="mc-desc">Научитесь создавать узоры в чашке с кофе. Бариста делится секретами лучших кофеен мира.</div>
+        <div class="mc-footer">
+          <div class="mc-price">900 <span>сом / чел</span></div>
+          <a href="#" class="btn-sign" onclick="signupMC('Латте-арт')">Записаться</a>
+        </div>
+      </div>
+    </div>
+    <!-- Card 4 -->
+    <div class="mc-card fade-in">
+      <div class="mc-card-img">
+        <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="320" height="200" fill="#F2EBD9"/>
+          <rect x="120" y="30" width="80" height="100" rx="2" fill="#2C1810" opacity="0.1"/>
+          <rect x="125" y="35" width="70" height="90" rx="1" fill="#C4884A" opacity="0.15"/>
+          <text x="160" y="90" text-anchor="middle" font-size="26" fill="#2C1810" opacity="0.6">📖</text>
+          <path d="M80 150 L120 140 L160 155 L200 138 L240 150" fill="none" stroke="#C4884A" stroke-width="1.5" opacity="0.6"/>
+          <text x="160" y="175" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#2C1810" opacity="0.45">Скетчбук с нуля</text>
+        </svg>
+        <div class="mc-badge" style="background: var(--sage)">Для пар</div>
+      </div>
+      <div class="mc-card-body">
+        <div class="mc-date">Четверги · 18:30</div>
+        <div class="mc-title">Скетчбук с нуля</div>
+        <div class="mc-desc">Графика, линии, тени — создаём скетчбук вместе. Идеально для пар и друзей. Уютная атмосфера.</div>
+        <div class="mc-footer">
+          <div class="mc-price">1 000 <span>сом / чел</span></div>
+          <a href="#" class="btn-sign" onclick="signupMC('Скетчбук с нуля')">Записаться</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<div id="menu">
+  <div class="menu-inner">
+    <div class="fade-in">
+      <div class="section-label">Наше меню</div>
+      <h2 class="section-title">Вкус, который<br><em>дополняет атмосферу</em></h2>
+      <p class="section-desc" style="margin-bottom: 2rem;">Каждое блюдо и напиток — часть общей эстетики. Мы выбираем только то, что вдохновляет.</p>
+    </div>
+    <div class="menu-tabs fade-in">
+      <button class="tab-btn active" onclick="filterMenu('coffee')">☕ Кофе</button>
+      <button class="tab-btn" onclick="filterMenu('breakfast')">🌅 Завтраки</button>
+      <button class="tab-btn" onclick="filterMenu('dessert')">🍰 Десерты</button>
+    </div>
+    <div class="menu-grid" id="menuGrid">
+      <!-- Кофе -->
+      <div class="menu-card" data-cat="coffee">
+        <div class="menu-card-img">☕</div>
+        <div class="menu-card-body">
+          <div class="menu-item-name">Флэт уайт</div>
+          <div class="menu-item-desc">Двойная порция эспрессо с бархатным молоком. Мягко и насыщенно.</div>
+          <div class="menu-item-price">230 сом</div>
+        </div>
+      </div>
+      <div class="menu-card" data-cat="coffee">
+        <div class="menu-card-img">🍵</div>
+        <div class="menu-card-body">
+          <div class="menu-item-name">Матча латте</div>
+          <div class="menu-item-desc">Японский церемониальный матча с овсяным молоком и нотой ванили.</div>
+          <div class="menu-item-price">280 сом</div>
+        </div>
+      </div>
+      <div class="menu-card" data-cat="coffee">
+        <div class="menu-card-img">🌿</div>
+        <div class="menu-card-body">
+          <div class="menu-item-name">Розовый раф</div>
+          <div class="menu-item-desc">Авторский раф с малиной и лепестками роз. Инстаграм-любимчик.</div>
+          <div class="menu-item-price">320 сом</div>
+        </div>
+      </div>
+      <div class="menu-card" data-cat="coffee">
+        <div class="menu-card-img">⬛</div>
+        <div class="menu-card-body">
+          <div class="menu-item-name">Угольный американо</div>
+          <div class="menu-item-desc">Чёрный как ночь, красивый как арт. Активированный уголь + эспрессо.</div>
+          <div class="menu-item-price">260 сом</div>
+        </div>
+      </div>
+      <!-- Завтраки -->
+      <div class="menu-card" data-cat="breakfast" style="display:none">
+        <div class="menu-card-img">🥑</div>
+        <div class="menu-card-body">
+          <div class="menu-item-name">Авокадо тост</div>
+          <div class="menu-item-desc">Ремесленный хлеб, авокадо, яйцо пашот, микрозелень, кунжут.</div>
+          <div class="menu-item-price">480 сом</div>
+        </div>
+      </div>
+      <div class="menu-card" data-cat="breakfast" style="display:none">
+        <div class="menu-card-img">🥞</div>
+        <div class="menu-card-body">
+          <div class="menu-item-name">Панкейки Arte</div>
+          <div class="menu-item-desc">Пышные, с сезонными ягодами и кленовым сиропом. Утреннее вдохновение.</div>
+          <div class="menu-item-price">420 сом</div>
+        </div>
+      </div>
+      <div class="menu-card" data-cat="breakfast" style="display:none">
+        <div class="menu-card-img">🍳</div>
+        <div class="menu-card-body">
+          <div class="menu-item-name">Яйца Бенедикт</div>
+          <div class="menu-item-desc">Классика: маффин, бекон, яйца пашот, соус голландез.</div>
+          <div class="menu-item-price">550 сом</div>
+        </div>
+      </div>
+      <div class="menu-card" data-cat="breakfast" style="display:none">
+        <div class="menu-card-img">🫐</div>
+        <div class="menu-card-body">
+          <div class="menu-item-name">Боул с гранолой</div>
+          <div class="menu-item-desc">Йогурт, домашняя гранола, ягоды, мёд. Лёгкий и сытный.</div>
+          <div class="menu-item-price">380 сом</div>
+        </div>
+      </div>
+      <!-- Десерты -->
+      <div class="menu-card" data-cat="dessert" style="display:none">
+        <div class="menu-card-img">🎂</div>
+        <div class="menu-card-body">
+          <div class="menu-item-name">Торт Arte</div>
+          <div class="menu-item-desc">Авторский торт месяца от нашего кондитера. Каждый раз — новый вкус.</div>
+          <div class="menu-item-price">390 сом</div>
+        </div>
+      </div>
+      <div class="menu-card" data-cat="dessert" style="display:none">
+        <div class="menu-card-img">🍮</div>
+        <div class="menu-card-body">
+          <div class="menu-item-name">Крем-брюле</div>
+          <div class="menu-item-desc">Классический французский десерт с хрустящей карамельной корочкой.</div>
+          <div class="menu-item-price">350 сом</div>
+        </div>
+      </div>
+      <div class="menu-card" data-cat="dessert" style="display:none">
+        <div class="menu-card-img">🍫</div>
+        <div class="menu-card-body">
+          <div class="menu-item-name">Фондан шоколадный</div>
+          <div class="menu-item-desc">Тёплый, с жидкой сердцевиной. Подаётся с шариком ванильного мороженого.</div>
+          <div class="menu-item-price">420 сом</div>
+        </div>
+      </div>
+      <div class="menu-card" data-cat="dessert" style="display:none">
+        <div class="menu-card-img">🧁</div>
+        <div class="menu-card-body">
+          <div class="menu-item-name">Тирамису Arte</div>
+          <div class="menu-item-desc">Нежный итальянский десерт с нашим фирменным эспрессо. Воздух в чашке.</div>
+          <div class="menu-item-price">330 сом</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="fade-in">
+    <div class="section-label">Галерея</div>
+    <h2 class="section-title">Атмосфера, которую<br>хочется <em>сохранить</em></h2>
+  </div>
+  <div class="gallery-grid fade-in">
+    <div class="gallery-item">
+      <svg viewBox="0 0 400 360" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="360" fill="#2C1810"/>
+        <rect x="0" y="0" width="400" height="360" fill="url(#g_int1)"/>
+        <defs>
+          <radialGradient id="g_int1" cx="40%" cy="35%">
+            <stop offset="0%" stop-color="#C4884A" stop-opacity="0.5"/>
+            <stop offset="100%" stop-color="#2C1810" stop-opacity="0.95"/>
+          </radialGradient>
+        </defs>
+        <rect x="30" y="40" width="120" height="160" rx="2" fill="#FAF7F2" opacity="0.12"/>
+        <rect x="40" y="50" width="100" height="140" rx="1" fill="#C4884A" opacity="0.15"/>
+        <circle cx="90" cy="120" r="35" fill="#C4884A" opacity="0.25"/>
+        <rect x="200" y="60" width="160" height="100" rx="2" fill="#FAF7F2" opacity="0.08"/>
+        <text x="200" y="250" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#FAF7F2" opacity="0.4" font-style="italic">интерьер</text>
+        <circle cx="320" cy="300" r="50" fill="#C4857A" opacity="0.1"/>
+      </svg>
+      <div class="gallery-overlay"><span>Интерьер</span></div>
+    </div>
+    <div class="gallery-item">
+      <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+        <rect width="300" height="180" fill="#EDE4CC"/>
+        <rect x="20" y="20" width="80" height="100" rx="2" fill="#C4884A" opacity="0.3"/>
+        <rect x="30" y="30" width="60" height="80" fill="#C4884A" opacity="0.2"/>
+        <circle cx="60" cy="70" r="20" fill="#C4884A" opacity="0.5"/>
+        <rect x="120" y="30" width="70" height="90" rx="2" fill="#2C1810" opacity="0.1"/>
+        <rect x="210" y="20" width="70" height="110" rx="2" fill="#C4857A" opacity="0.25"/>
+        <text x="150" y="155" text-anchor="middle" font-size="10" fill="#2C1810" opacity="0.4" font-family="serif">картины</text>
+      </svg>
+      <div class="gallery-overlay"><span>Картины</span></div>
+    </div>
+    <div class="gallery-item">
+      <svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg">
+        <rect width="240" height="180" fill="#F0E4CC"/>
+        <circle cx="80" cy="90" r="50" fill="#C4884A" opacity="0.2"/>
+        <circle cx="160" cy="80" r="40" fill="#C4857A" opacity="0.2"/>
+        <text x="120" y="95" text-anchor="middle" font-size="36" opacity="0.7">☕</text>
+        <text x="120" y="155" text-anchor="middle" font-size="10" fill="#2C1810" opacity="0.4" font-family="serif">атмосфера</text>
+      </svg>
+      <div class="gallery-overlay"><span>Напитки</span></div>
+    </div>
+    <div class="gallery-item">
+      <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+        <rect width="320" height="180" fill="#E8DEC8"/>
+        <circle cx="100" cy="90" r="40" fill="#2C1810" opacity="0.08"/>
+        <circle cx="100" cy="90" r="28" fill="#2C1810" opacity="0.06"/>
+        <text x="100" y="98" text-anchor="middle" font-size="22" opacity="0.5">👩‍🎨</text>
+        <circle cx="220" cy="85" r="35" fill="#C4857A" opacity="0.12"/>
+        <text x="220" y="93" text-anchor="middle" font-size="20" opacity="0.5">👫</text>
+        <text x="160" y="155" text-anchor="middle" font-size="10" fill="#2C1810" opacity="0.4" font-family="serif">мастер-класс</text>
+      </svg>
+      <div class="gallery-overlay"><span>Мастер-классы</span></div>
+    </div>
+    <div class="gallery-item">
+      <svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg">
+        <rect width="240" height="180" fill="#F5ECD8"/>
+        <rect x="20" y="20" width="200" height="130" rx="4" fill="#2C1810" opacity="0.06"/>
+        <line x1="20" y1="60" x2="220" y2="60" stroke="#C4884A" stroke-width="0.5" opacity="0.4"/>
+        <line x1="20" y1="100" x2="220" y2="100" stroke="#C4884A" stroke-width="0.5" opacity="0.4"/>
+        <text x="120" y="90" text-anchor="middle" font-size="24" opacity="0.6">🖼</text>
+        <text x="120" y="155" text-anchor="middle" font-size="10" fill="#2C1810" opacity="0.4" font-family="serif">галерея</text>
+      </svg>
+      <div class="gallery-overlay"><span>Выставки</span></div>
+    </div>
+    <div class="gallery-item">
+      <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+        <rect width="320" height="180" fill="#EDE3CE"/>
+        <path d="M0 90 Q80 50 160 90 Q240 130 320 90" fill="none" stroke="#C4884A" stroke-width="2" opacity="0.4"/>
+        <path d="M0 110 Q80 70 160 110 Q240 150 320 110" fill="none" stroke="#C4857A" stroke-width="1.5" opacity="0.3"/>
+        <text x="160" y="95" text-anchor="middle" font-size="22" opacity="0.6">🕯</text>
+        <text x="160" y="155" text-anchor="middle" font-size="10" fill="#2C1810" opacity="0.4" font-family="serif">вечер</text>
+      </svg>
+      <div class="gallery-overlay"><span>Вечерние встречи</span></div>
+    </div>
+    <div class="gallery-item">
+      <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="180" fill="#2C1810"/>
+        <circle cx="100" cy="80" r="60" fill="#C4884A" opacity="0.15"/>
+        <circle cx="200" cy="90" r="70" fill="#C4857A" opacity="0.1"/>
+        <circle cx="300" cy="75" r="55" fill="#B8963A" opacity="0.12"/>
+        <text x="100" y="88" text-anchor="middle" font-size="24" fill="#FAF7F2" opacity="0.5">🎨</text>
+        <text x="200" y="98" text-anchor="middle" font-size="28" fill="#FAF7F2" opacity="0.4">✨</text>
+        <text x="300" y="83" text-anchor="middle" font-size="22" fill="#FAF7F2" opacity="0.5">🖌</text>
+        <text x="200" y="155" text-anchor="middle" font-size="10" fill="#FAF7F2" opacity="0.3" font-family="serif">арт-пространство</text>
+      </svg>
+      <div class="gallery-overlay"><span>Арт-пространство</span></div>
+    </div>
+    <div class="gallery-item">
+      <svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg">
+        <rect width="240" height="180" fill="#F0E5D0"/>
+        <rect x="40" y="30" width="70" height="90" rx="2" fill="#C4884A" opacity="0.2"/>
+        <rect x="130" y="40" width="70" height="80" rx="2" fill="#C4857A" opacity="0.2"/>
+        <text x="75" y="82" text-anchor="middle" font-size="18" opacity="0.65">🌸</text>
+        <text x="165" y="87" text-anchor="middle" font-size="18" opacity="0.65">🌿</text>
+        <text x="120" y="155" text-anchor="middle" font-size="10" fill="#2C1810" opacity="0.4" font-family="serif">детали</text>
+      </svg>
+      <div class="gallery-overlay"><span>Детали</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<div id="reviews">
+  <div class="reviews-inner">
+    <div class="fade-in">
+      <div class="section-label">Отзывы</div>
+      <h2 class="section-title">Они уже были здесь<br>и <em>вернулись снова</em></h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card fade-in">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Пришла на акварельный мастер-класс одна, ушла с новыми друзьями и картиной. Атмосфера просто волшебная — свечи, музыка, кофе. Буду ходить каждую пятницу!"</div>
+        <div class="review-author">
+          <div class="review-avatar" style="background: rgba(196,136,74,0.25); color: #D9A96B;">АМ</div>
+          <div>
+            <div class="review-name">Айнур М.</div>
+            <div class="review-meta">Instagram · @ainur.artwork</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card fade-in">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Привела парня на свидание — он не ожидал ничего подобного в Бишкеке. Уютно, красиво, вкусно. Розовый раф — это что-то! Точно станет нашим любимым местом."</div>
+        <div class="review-author">
+          <div class="review-avatar" style="background: rgba(196,133,122,0.25); color: #C4857A;">ДК</div>
+          <div>
+            <div class="review-name">Диана К.</div>
+            <div class="review-meta">2Google Maps · 5 отзывов</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card fade-in">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Команда на корпоратив — мастер-класс по линогравюре. Все были в восторге! Организация на высшем уровне, стол накрыли идеально. Спасибо, вы лучшие!"</div>
+        <div class="review-author">
+          <div class="review-avatar" style="background: rgba(138,158,138,0.25); color: #8A9E8A;">ОС</div>
+          <div>
+            <div class="review-name">Олеся С.</div>
+            <div class="review-meta">2GIS · корпоратив 12 чел.</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card fade-in">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Пришла с подругой просто выпить кофе — задержались на 4 часа. Интерьер как из журнала, всё продумано до мелочей. Авокадо тост был шедевром. Уже скучаю!"</div>
+        <div class="review-author">
+          <div class="review-avatar" style="background: rgba(184,150,58,0.25); color: #B8963A;">ЗА</div>
+          <div>
+            <div class="review-name">Зарина А.</div>
+            <div class="review-meta">Instagram Stories</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card fade-in">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Фотограф во мне ликует. Каждый угол — готовая картинка. Картины на стенах, мягкий свет, стильная посуда. Сделал 200 фото за один визит. Место — мечта!"</div>
+        <div class="review-author">
+          <div class="review-avatar" style="background: rgba(44,24,16,0.15); color: #4A2E1A;">БЭ</div>
+          <div>
+            <div class="review-name">Бакыт Э.</div>
+            <div class="review-meta">Instagram · фотограф</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card fade-in">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Дочка на день рождения попросила сюда. Организовали мастер-класс для 6 детей — всё прошло волшебно! Торт Arte был обалденным. Благодарим всю команду!"</div>
+        <div class="review-author">
+          <div class="review-avatar" style="background: rgba(196,136,74,0.2); color: #C4884A;">МТ</div>
+          <div>
+            <div class="review-name">Мария Т.</div>
+            <div class="review-meta">2GIS · день рождения</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-visual fade-in">
+    <div class="about-frame">
+      <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="500" fill="#2C1810"/>
+        <defs>
+          <radialGradient id="g_about" cx="50%" cy="40%">
+            <stop offset="0%" stop-color="#C4884A" stop-opacity="0.4"/>
+            <stop offset="100%" stop-color="#2C1810" stop-opacity="1"/>
+          </radialGradient>
+        </defs>
+        <rect width="400" height="500" fill="url(#g_about)"/>
+        <rect x="40" y="60" width="140" height="180" rx="2" fill="#FAF7F2" opacity="0.08"/>
+        <rect x="50" y="70" width="120" height="160" rx="1" fill="#C4884A" opacity="0.15"/>
+        <circle cx="110" cy="150" r="45" fill="#C4884A" opacity="0.2"/>
+        <text x="110" y="162" text-anchor="middle" font-size="36" fill="#C4884A" opacity="0.6">🎨</text>
+        <rect x="220" y="40" width="140" height="120" rx="2" fill="#FAF7F2" opacity="0.06"/>
+        <rect x="220" y="200" width="140" height="120" rx="2" fill="#C4857A" opacity="0.12"/>
+        <path d="M40 300 Q200 260 360 300 Q200 340 40 300z" fill="#C4884A" opacity="0.06"/>
+        <text x="200" y="380" text-anchor="middle" font-family="Georgia, serif" font-size="16" fill="#FAF7F2" opacity="0.3" font-style="italic">Coffee Arte Gallery</text>
+        <text x="200" y="410" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#FAF7F2" opacity="0.2">Bishkek · 2023</text>
+        <line x1="80" y1="430" x2="320" y2="430" stroke="#FAF7F2" stroke-width="0.5" opacity="0.15"/>
+      </svg>
+    </div>
+    <div class="about-badge">
+      <div class="about-badge-text">Открыты<br>с 2023</div>
+    </div>
+  </div>
+  <div class="about-content fade-in">
+    <div class="section-label">О нас</div>
+    <h2 class="section-title">Не просто кофейня —<br>это <em>пространство для тебя</em></h2>
+    <p class="section-desc">Coffee Arte Gallery — место, где искусство живёт рядом с чашкой кофе. Мы верим, что красота вдохновляет, а вдохновение меняет день.</p>
+    <p class="section-desc" style="margin-top: 1rem;">Здесь каждый стол — у картины. Каждый мастер-класс — это история. Каждый гость — часть нашей галереи жизни.</p>
+    <div class="about-values">
+      <div class="value-item">
+        <div class="value-title">Арт-концепция</div>
+        <div class="value-desc">Работы местных художников сменяются каждый месяц. Вы — первые зрители.</div>
+      </div>
+      <div class="value-item">
+        <div class="value-title">Творческое пространство</div>
+        <div class="value-desc">Мастер-классы, выставки, арт-вечера. Место рождения идей.</div>
+      </div>
+      <div class="value-item">
+        <div class="value-title">Встречи и эмоции</div>
+        <div class="value-desc">Свидания, дни рождения, встречи с подругами — всё здесь особенное.</div>
+      </div>
+      <div class="value-item">
+        <div class="value-title">Качество и эстетика</div>
+        <div class="value-desc">От зерна в чашке до рамы на стене — всё выбрано с любовью.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTS -->
+<div id="contacts">
+  <div class="contacts-inner">
+    <div class="fade-in">
+      <div class="section-label">Контакты</div>
+      <h2 class="section-title">Найдите нас<br>в <em>самом атмосферном</em><br>месте Бишкека</h2>
+      <div style="margin-top: 2rem;">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Адрес</div>
+            <div class="contact-value">г. Бишкек, ул. Боконбаева 168<br>2-й этаж, вход со двора</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-label">Телефон</div>
+            <div class="contact-value"><a href="tel:+996700123456">+996 700 123 456</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <div class="contact-label">Часы работы</div>
+            <div class="contact-value">Пн–Пт: 09:00 – 22:00<br>Сб–Вс: 10:00 – 23:00</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value"><a href="mailto:hello@coffeearte.kg">hello@coffeearte.kg</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="social-buttons">
+        <a href="https://wa.me/996700123456" class="btn-social btn-wa" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+        <a href="https://instagram.com/coffeearte.kg" class="btn-social btn-ig" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          Instagram
+        </a>
+      </div>
+    </div>
+    <div class="fade-in">
+      <div class="map-placeholder">
+        <svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg">
+          <rect width="480" height="360" fill="#EDE4CC"/>
+          <!-- Street grid -->
+          <rect x="0" y="140" width="480" height="8" fill="#D4C9A8" rx="1"/>
+          <rect x="0" y="200" width="480" height="6" fill="#D4C9A8" rx="1"/>
+          <rect x="0" y="260" width="480" height="5" fill="#D4C9A8" rx="1"/>
+          <rect x="80" y="0" width="7" height="360" fill="#D4C9A8" rx="1"/>
+          <rect x="200" y="0" width="6" height="360" fill="#D4C9A8" rx="1"/>
+          <rect x="340" y="0" width="5" height="360" fill="#D4C9A8" rx="1"/>
+          <!-- Blocks -->
+          <rect x="90" y="10" width="100" height="120" rx="3" fill="#C4B88A" opacity="0.4"/>
+          <rect x="210" y="10" width="120" height="120" rx="3" fill="#C4B88A" opacity="0.35"/>
+          <rect x="350" y="10" width="120" height="120" rx="3" fill="#C4B88A" opacity="0.3"/>
+          <rect x="10" y="160" width="60" height="30" rx="2" fill="#C4B88A" opacity="0.4"/>
+          <rect x="90" y="160" width="100" height="30" rx="2" fill="#C4B88A" opacity="0.35"/>
+          <rect x="210" y="155" width="120" height="35" rx="2" fill="#C4B88A" opacity="0.3"/>
+          <rect x="10" y="215" width="60" height="35" rx="2" fill="#C4B88A" opacity="0.35"/>
+          <rect x="90" y="215" width="100" height="35" rx="2" fill="#C4B88A" opacity="0.3"/>
+          <rect x="210" y="215" width="120" height="35" rx="2" fill="#C4B88A" opacity="0.35"/>
+          <rect x="90" y="275" width="180" height="75" rx="3" fill="#C4B88A" opacity="0.3"/>
+          <!-- Coffee Arte location -->
+          <circle cx="240" cy="144" r="20" fill="#C4884A" opacity="0.9"/>
+          <circle cx="240" cy="144" r="14" fill="white" opacity="0.95"/>
+          <text x="240" y="150" text-anchor="middle" font-size="14">☕</text>
+          <!-- Pin -->
+          <path d="M240 124 L240 108" stroke="#C4884A" stroke-width="2" stroke-dasharray="3,2" opacity="0.7"/>
+          <circle cx="240" cy="104" r="6" fill="#C4884A"/>
+          <circle cx="240" cy="104" r="3" fill="white"/>
+          <!-- Label -->
+          <rect x="165" y="74" width="150" height="24" rx="12" fill="white" opacity="0.95"/>
+          <text x="240" y="90" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#2C1810" font-weight="500">Coffee Arte Gallery</text>
+          <!-- Street label -->
+          <text x="240" y="137" text-anchor="middle" font-size="7" fill="white" opacity="0.8" font-family="sans-serif">ул. Боконбаева 168</text>
+          <!-- Zoom controls -->
+          <rect x="20" y="20" width="28" height="28" rx="6" fill="white" opacity="0.9"/>
+          <text x="34" y="38" text-anchor="middle" font-size="16" fill="#2C1810" opacity="0.7">+</text>
+          <rect x="20" y="52" width="28" height="28" rx="6" fill="white" opacity="0.9"/>
+          <text x="34" y="70" text-anchor="middle" font-size="16" fill="#2C1810" opacity="0.7">−</text>
+          <!-- Scale indicator -->
+          <line x1="380" y1="340" x2="440" y2="340" stroke="#2C1810" stroke-width="1.5" opacity="0.4"/>
+          <line x1="380" y1="336" x2="380" y2="344" stroke="#2C1810" stroke-width="1.5" opacity="0.4"/>
+          <line x1="440" y1="336" x2="440" y2="344" stroke="#2C1810" stroke-width="1.5" opacity="0.4"/>
+          <text x="410" y="332" text-anchor="middle" font-size="9" fill="#2C1810" opacity="0.5" font-family="sans-serif">200 м</text>
+        </svg>
+      </div>
+      <p style="font-size:0.78rem; color: var(--text-muted); margin-top: 0.75rem; text-align: center;">
+        Кликните на карту для навигации →
+        <a href="https://maps.google.com/?q=Бишкек+Боконбаева+168" target="_blank" style="color: var(--caramel); text-decoration: none; font-weight:500;">Google Maps ↗</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Coffee Arte Gallery</strong> · Бишкек · ул. Боконбаева 168</p>
+  <p style="margin-top: 0.5rem;">© 2024–2025 Coffee Arte Gallery. Все права защищены.</p>
+</footer>
+
+<!-- STICKY CTA -->
+<div class="sticky-cta" id="stickyCta" style="opacity:0; pointer-events:none;">
+  <a href="https://wa.me/996700123456" class="sticky-wa" target="_blank" title="WhatsApp">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+  <a href="#booking" class="sticky-book">Забронировать стол</a>
+</div>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+
+    const sticky = document.getElementById('stickyCta');
+    if (window.scrollY > 400) {
+      sticky.style.opacity = '1';
+      sticky.style.pointerEvents = 'auto';
+    } else {
+      sticky.style.opacity = '0';
+      sticky.style.pointerEvents = 'none';
+    }
+  });
+
+  // Fade in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Menu tabs
+  function filterMenu(cat) {
+    document.querySelectorAll('.menu-card').forEach(card => {
+      card.style.display = card.dataset.cat === cat ? 'block' : 'none';
+    });
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+  }
+
+  // Mobile nav
+  function openMobileNav() { document.getElementById('mobileNav').classList.add('open'); }
+  function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); }
+
+  // WhatsApp booking
+  document.getElementById('bookingWaBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('fname').value || 'Гость';
+    const phone = document.getElementById('fphone').value || 'не указан';
+    const date = document.getElementById('fdate').value || 'не указана';
+    const time = document.getElementById('ftime').value || 'не указано';
+    const guests = document.getElementById('fguests').value || 'не указано';
+    const msg = encodeURIComponent(
+      `Привет! Хочу забронировать стол 🎨\n\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n📅 Дата: ${date}\n⏰ Время: ${time}\n👥 Гостей: ${guests}\n\nЖду подтверждения!`
+    );
+    window.open(`https://wa.me/996700123456?text=${msg}`, '_blank');
+  });
+
+  // MC signup
+  function signupMC(mcName) {
+    const msg = encodeURIComponent(`Привет! Хочу записаться на мастер-класс «${mcName}» 🎨\n\nПодскажите ближайшие даты и свободные места?`);
+    window.open(`https://wa.me/996700123456?text=${msg}`, '_blank');
+  }
+
+  // Set min date for booking
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('fdate').setAttribute('min', today);
+</script>
+</body>
+</html>
